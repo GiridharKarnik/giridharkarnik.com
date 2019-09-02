@@ -1,0 +1,12 @@
+#scrollContainer {
+  overflow: scroll;
+}
+
+.mainPage {
+  font-size: 2em;
+  background-color: black;
+  display: flex;
+  overflow: scroll;
+  white-space: nowrap;
+}
+

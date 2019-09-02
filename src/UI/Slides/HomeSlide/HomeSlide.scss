@@ -1,0 +1,70 @@
+@import "../../../theme.scss";
+
+.homeSlideContainer {
+  position: relative;
+}
+
+.backgroundContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: $primary-color;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 1;
+  /* height: 100%; */
+  display: flex;
+  margin-left: 10vw;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.mainTextContainer {
+  color: $primary-color;
+  text-align: left;
+  max-width: 90vw;
+  font-weight: 800;
+  @include breakpoint(sm) {
+    max-width: 60vw;
+  }
+  @include breakpoint(md) {
+    max-width: 50vw;
+  }
+}
+
+.nameContainer {
+  font-size: 1.8em;
+  line-height: 1em;
+  margin-top: -15vh;
+  @include breakpoint(sm) {
+    font-size: 2.5em;
+  }
+  @include breakpoint(lg) {
+    font-size: 3em;
+  }
+  .firstName {
+    font-family: "Montserrat", sans-serif;
+  }
+  .lastName {
+    font-weight: 800;
+    display: block;
+    color: $secondary-color;
+  }
+}
+
+.introContainer {
+  font-family: "Open Sans", sans-serif;
+  margin-top: 30px;
+  white-space: pre-wrap;
+  color: $tertiary-color;
+  font-size: 0.6em;
+  @include breakpoint(sm) {
+    font-size: 0.8em;
+  }
+}

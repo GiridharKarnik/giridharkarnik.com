@@ -1,0 +1,20 @@
+.navBarContainer {
+  position: absolute;
+  background: white;
+  border: 1px grey solid;
+  height: 50px;
+  left: 50%;
+  width: 300px;
+  top: 90vh;
+  margin-left: -150px;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  & > div {
+    cursor: pointer;
+  }
+}
