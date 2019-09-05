@@ -20,7 +20,6 @@ const smoothScrollTo = (
     timeElapsed += timeSteps;
     if (containerRef.current) {
       let currentPos = containerRef.current.scrollLeft;
-      console.log(currentPos);
       if (finalPos > currentPos) {
         containerRef.current.scrollLeft += smoothScrollEaseOutQuad(1000, timeElapsed);
       } else if (finalPos < currentPos) {

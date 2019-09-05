@@ -22,12 +22,21 @@ class MainPage extends React.Component<{}, IState> {
     this.state = {
       slideDimensions: {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight - 5
       }
     };
   }
 
   private containerRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+  public componentDidMount() {
+    window.addEventListener("resize", this._updateDimensions);
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener("resize", this._updateDimensions);
+    window.removeEventListener("scroll", this._handleScroll);
+  }
 
   public render() {
     return (
@@ -35,6 +44,7 @@ class MainPage extends React.Component<{}, IState> {
         <div
           className="mainPage"
           style={{ width: this.state.slideDimensions.width * 3 }}
+          onScroll={this._handleScroll}
         >
           <HomeSlide slideDimensions={this.state.slideDimensions} />
           <ProjectsSlide slideDimensions={this.state.slideDimensions} />
@@ -49,32 +59,27 @@ class MainPage extends React.Component<{}, IState> {
     this.setState({
       slideDimensions: {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight - 5
       }
     });
   };
 
-  public componentDidMount() {
-    window.addEventListener("resize", this._updateDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this._updateDimensions);
-  }
-
-  _onNavClick = (slideNo: number) => {
-    console.log(`slide to ${slideNo}`);
+  private _onNavClick = (slideNo: number) => {
     this._scrollToPosition(
       slideNo * this.state.slideDimensions.width -
         this.state.slideDimensions.width
     );
   };
 
-  _scrollToPosition = (pixels: number) => {
+  private _scrollToPosition = (pixels: number) => {
     if (this.containerRef.current) {
       ScrollHelper.smoothScrollTo(this.containerRef, pixels);
     }
   };
+
+  private _handleScroll = (value: any) => {
+    
+  }
 }
 
 export default MainPage;

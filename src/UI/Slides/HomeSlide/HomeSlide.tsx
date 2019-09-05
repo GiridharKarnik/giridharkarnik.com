@@ -12,29 +12,85 @@ interface IProps {
   };
 }
 
-class HomeSlide extends React.Component<IProps, {}> {
+interface IState {
+  contentLeft: number;
+  contentOpacity: number;
+}
+
+class HomeSlide extends React.Component<IProps, IState> {
   canvasRef: any;
 
   constructor(props: IProps) {
     super(props);
     this.canvasRef = React.createRef();
+    this.state = {
+      contentLeft: 0,
+      contentOpacity: 1
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
+    this._setUpBackgroundAnimation();
+    window.addEventListener("scroll", this._handleScroll, true);
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener("scroll", this._handleScroll);
+  }
+
+  public render() {
+    let contentStyle = {
+      transform: `translateX(${this.state.contentLeft}px)`,
+      opacity: this.state.contentOpacity
+    };
+
+    return (
+      <div
+        className="homeSlideContainer"
+        style={{
+          width: this.props.slideDimensions.width,
+          height: this.props.slideDimensions.height
+        }}
+      >
+        {/* Background container, scrolls faster */}
+        <canvas id="canvas" ref={this.canvasRef}>
+          Your browser does not support canvas
+        </canvas>
+
+        {/* Background container, scrolls faster */}
+        <div className="contentContainer" style={contentStyle}>
+          <div className="mainTextContainer">
+            <div className="nameContainer">
+              <span className="firstName">GIRIDHAR</span>
+              <span className="lastName">KARNIK</span>
+            </div>
+            <div className="introContainer">Boosting ideas since 2008.</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  private _setUpBackgroundAnimation = () => {
     this.canvasRef.current.height = window.innerHeight;
     this.canvasRef.current.width = window.innerWidth;
 
     var c = this.canvasRef.current.getContext("2d");
 
     class Meteor {
-
       x1: number;
       y1: number;
       x2: number;
       y2: number;
       speed: number;
 
-      constructor(x1: number, y1: number, x2: number, y2: number, speed: number) {
+      constructor(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        speed: number
+      ) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -82,7 +138,7 @@ class HomeSlide extends React.Component<IProps, {}> {
       };
     }
 
-    let meteorArray:any = [];
+    let meteorArray: any = [];
 
     /**
      * Each meteor should be between 100px and 200px long.
@@ -96,8 +152,6 @@ class HomeSlide extends React.Component<IProps, {}> {
 
       let meteorLength = Math.random() * 100 + 50;
       let speed = Math.random() * 4;
-
-      console.log(`meteor length ${meteorLength}`);
 
       let x2 = x1 + meteorLength;
       let y2 = y1 + meteorLength;
@@ -116,34 +170,21 @@ class HomeSlide extends React.Component<IProps, {}> {
     }
 
     animate();
-  }
+  };
 
-  public render() {
-    return (
-      <div
-        className="homeSlideContainer"
-        style={{
-          width: this.props.slideDimensions.width,
-          height: this.props.slideDimensions.height
-        }}
-      >
-        <canvas id="canvas" ref={this.canvasRef}>
-          {" "}
-          Your browser does not support canvas{" "}
-        </canvas>
-        <div className="contentContainer">
-          <div className="mainTextContainer">
-            <div className="nameContainer">
-              <span className="firstName">GIRIDHAR</span>
-              <span className="lastName">KARNIK</span>
-            </div>
-
-            <div className="introContainer">Boosting ideas since 2008.</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  /**
+   * * To achieve parallax effect, move the contentContainer to the right by some amount
+   * * as and when the screen moves to the right.
+   *
+   * * opacity = scrollLeft / innerWidth
+   */
+  private _handleScroll = (event: any) => {
+    const scrolledRightBy = event.target.scrollLeft;
+    this.setState({
+      contentLeft: Math.floor(scrolledRightBy / 3),
+      contentOpacity: 1 - scrolledRightBy / window.innerWidth
+    });
+  };
 }
 
 export default HomeSlide;
