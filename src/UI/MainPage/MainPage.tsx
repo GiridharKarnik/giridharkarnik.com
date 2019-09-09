@@ -22,20 +22,22 @@ class MainPage extends React.Component<{}, IState> {
     this.state = {
       slideDimensions: {
         width: window.innerWidth,
-        height: window.innerHeight - 5
+        height: window.innerHeight
       }
     };
   }
 
   private containerRef: React.RefObject<HTMLDivElement> = React.createRef();
+  private scrollInProgress: boolean = false;
 
   public componentDidMount() {
     window.addEventListener("resize", this._updateDimensions);
+    window.addEventListener("mousewheel", this._handleScroll);
   }
 
   public componentWillUnmount() {
     window.removeEventListener("resize", this._updateDimensions);
-    window.removeEventListener("scroll", this._handleScroll);
+    window.removeEventListener("mousewheel", this._handleScroll);
   }
 
   public render() {
@@ -59,7 +61,7 @@ class MainPage extends React.Component<{}, IState> {
     this.setState({
       slideDimensions: {
         width: window.innerWidth,
-        height: window.innerHeight - 5
+        height: window.innerHeight
       }
     });
   };
@@ -72,14 +74,64 @@ class MainPage extends React.Component<{}, IState> {
   };
 
   private _scrollToPosition = (pixels: number) => {
-    if (this.containerRef.current) {
-      ScrollHelper.smoothScrollTo(this.containerRef, pixels);
+    if (this.containerRef.current && !this.scrollInProgress) {
+      this.scrollInProgress = true;
+      ScrollHelper.smoothScrollTo(this.containerRef, pixels)
+        .then(() => {
+          this.scrollInProgress = false;
+        })
+        .catch(() => {
+          this.scrollInProgress = false;
+        });
     }
   };
 
-  private _handleScroll = (value: any) => {
-    
-  }
+  private _getCurrentSlide = (
+    containerRef: React.RefObject<HTMLDivElement>
+  ) => {
+    let slideNo = -1;
+    if (containerRef && containerRef.current) {
+      const slideWidth = window.innerWidth;
+      const currentPos = containerRef.current.scrollLeft;
+      slideNo = Math.floor(currentPos / slideWidth);
+    }
+
+    return slideNo + 1;
+  };
+
+  private _handleScroll = (event: any) => {
+    if (!this.scrollInProgress) {
+      if (this.containerRef && this.containerRef.current) {
+        const currentSlide = this._getCurrentSlide(this.containerRef);
+
+        let nextSlide: number;
+
+        if ((event.wheelDelta || event.detail) > 0) {
+          // scroll to next slide
+          nextSlide = currentSlide + 1;
+        } else {
+          // scroll to previous slide
+          nextSlide = currentSlide - 1;
+        }
+
+        if (nextSlide <= 0 || nextSlide > 3) {
+          return;
+        }
+
+        const pixels =
+          nextSlide * this.state.slideDimensions.width -
+          this.state.slideDimensions.width;
+        this.scrollInProgress = true;
+        ScrollHelper.smoothScrollTo(this.containerRef, pixels)
+          .then(() => {
+            this.scrollInProgress = false;
+          })
+          .catch(() => {
+            this.scrollInProgress = false;
+          });
+      }
+    }
+  };
 }
 
 export default MainPage;

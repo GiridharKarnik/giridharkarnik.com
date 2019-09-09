@@ -1,5 +1,6 @@
 #scrollContainer {
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .mainPage {
@@ -8,4 +9,3 @@
   display: flex;
   white-space: nowrap;
 }
-

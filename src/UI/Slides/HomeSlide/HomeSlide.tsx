@@ -1,8 +1,5 @@
 import * as React from "react";
 
-import ReactVivus from "react-vivus";
-import svg from "./example.svg";
-
 import "./HomeSlide.scss";
 
 interface IProps {
@@ -181,7 +178,7 @@ class HomeSlide extends React.Component<IProps, IState> {
   private _handleScroll = (event: any) => {
     const scrolledRightBy = event.target.scrollLeft;
     this.setState({
-      contentLeft: Math.floor(scrolledRightBy / 3),
+      contentLeft: Math.floor(scrolledRightBy / 2.5),
       contentOpacity: 1 - scrolledRightBy / window.innerWidth
     });
   };
