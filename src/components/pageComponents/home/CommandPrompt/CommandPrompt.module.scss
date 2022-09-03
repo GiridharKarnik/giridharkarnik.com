@@ -5,6 +5,7 @@
 .commandPromptContainer {
   height: 80px;
   border-radius: 10px;
+  box-shadow: 5px 5px 15px -5px #000000;
   background-color: $primary-color-dark-accent-1;
   width: 100%;
   cursor: text;
@@ -27,8 +28,9 @@
     height: 100%;
     margin-left: 8px;
     flex: 1;
-    font-size: 2vw;
+    font-size: 2.4vw;
     font-family: 'Source Code Pro', monospace;
+    outline: none;
 
     @include for-phone-only {
       font-size: 12px;

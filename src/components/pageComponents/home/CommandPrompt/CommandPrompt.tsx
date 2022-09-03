@@ -5,9 +5,9 @@ import variables from '@styles/variables.module.scss';
 import { useWindowSize } from '@hooks/index';
 
 export const CommandPrompt: React.FC = () => {
-  const [width, height] = useWindowSize();
+  const [width] = useWindowSize();
 
-  const arrowHeight: string = width > 900 ? '20px' : width > 599 ? '14px' : '10px';
+  const arrowHeight: string = width > 900 ? '16px' : width > 599 ? '12px' : '10px';
 
   return (
     <div className={styles.commandPromptContainer}>
