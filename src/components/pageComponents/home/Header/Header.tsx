@@ -4,8 +4,13 @@ import { GithubIcon, LinkedinIcon } from '@components/common/icons';
 import variables from '@styles/variables.module.scss';
 
 import styles from './Header.module.scss';
+import { useWindowSize } from '@hooks/useWindowSize';
 
 export const Header: React.FC = () => {
+  const [width] = useWindowSize();
+
+  const iconSize: string = width > 900 ? '34px' : width > 599 ? '28px' : '24px';
+
   return (
     <div className={styles.headerContainer}>
       <div
@@ -14,7 +19,7 @@ export const Header: React.FC = () => {
           window.open('https://github.com/GiridharKarnik');
         }}
       >
-        <GithubIcon size="30px" color={variables.primaryIconColorDark} />
+        <GithubIcon size={iconSize} color={variables.primaryIconColorDark} />
       </div>
 
       <div
@@ -23,7 +28,7 @@ export const Header: React.FC = () => {
           window.open('https://linkedin.com/in/GiridharKarnik');
         }}
       >
-        <LinkedinIcon size="30px" color={variables.primaryIconColorDark} />
+        <LinkedinIcon size={iconSize} color={variables.primaryIconColorDark} />
       </div>
     </div>
   );
