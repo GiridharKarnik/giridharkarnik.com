@@ -1,0 +1,29 @@
+@import './styles/variables.module';
+@import './styles/mixins';
+
+.commandPromptContainer {
+  height: 80px;
+  border-radius: 10px;
+  background-color: $primary-color-dark-accent-1;
+  width: 100%;
+  cursor: text;
+  margin-top: 30px;
+  position: relative;
+  padding: 10px 20px;
+
+  @include flexCentered;
+
+  .commandPromptInput {
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    margin-left: 8px;
+    flex: 1;
+    font-size: 22px;
+    font-family: 'Source Code Pro', monospace;
+
+    ::placeholder {
+      color: $primary-placeholder-text-color-dark-background;
+    }
+  }
+}

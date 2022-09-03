@@ -1,0 +1,16 @@
+@import "./styles/_mixins.scss";
+
+.headerContainer {
+    width: 100vw;
+    padding: 40px;
+    position: absolute;
+    top: 0;
+
+    @include flexCentered;
+    justify-content: flex-start;
+
+    .iconContainer {
+        margin-right: 30px;
+        cursor: pointer;
+    }
+}

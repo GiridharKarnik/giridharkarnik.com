@@ -1,0 +1,12 @@
+$primary-color-dark: #110F1B;
+$primary-color-dark-accent-1: #1E1D2A;
+$primary-icon-color-dark: #FB8B24;
+$primary-text-color-dark-background: #E6E6E6;
+$primary-placeholder-text-color-dark-background: #898989;
+
+:export {
+    primaryColor: $primary-color-dark;
+    primaryIconColorDark: $primary-icon-color-dark;
+    primaryTextColorDarkBackground: $primary-text-color-dark-background;
+    primaryPlaceHolderTextColorDarkBackground: $primary-placeholder-text-color-dark-background;
+}

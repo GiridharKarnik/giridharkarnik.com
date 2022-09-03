@@ -1,0 +1,39 @@
+@import './styles/mixins';
+@import './styles/variables.module.scss';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  @include flexColumnCentered;
+
+  .titleAndCommandPromptContainer {
+    @include flexColumnCentered;
+  }
+
+  .titleTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+
+    .welcomeMessage {
+      font-size: 20px;
+      color: $primary-text-color-dark-background;
+      margin: 0;
+      padding: 20px 0;
+      font-family: 'Merriweather', serif;
+    }
+
+    .titleText {
+      font-size: 90px;
+      color: $primary-text-color-dark-background;
+      margin: 0;
+      padding: 0;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+  }
+}
+
