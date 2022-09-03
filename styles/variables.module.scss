@@ -1,12 +1,27 @@
+//colors
 $primary-color-dark: #110F1B;
 $primary-color-dark-accent-1: #1E1D2A;
 $primary-icon-color-dark: #FB8B24;
 $primary-text-color-dark-background: #E6E6E6;
 $primary-placeholder-text-color-dark-background: #898989;
 
+// device sizes
+$phone: 599px;
+$tablet-portrait: 600px;
+$tablet-landscape: 900px;
+$desktop: 1200px;
+$big-desktop: 1800px;
+
 :export {
     primaryColor: $primary-color-dark;
     primaryIconColorDark: $primary-icon-color-dark;
     primaryTextColorDarkBackground: $primary-text-color-dark-background;
     primaryPlaceHolderTextColorDarkBackground: $primary-placeholder-text-color-dark-background;
+
+    //device sizes
+    phone: $phone;
+    tabletPortrait: $tablet-portrait;
+    tabletLandscape: $tablet-landscape;
+    desktop: $desktop;
+    bigDesktop: $big-desktop;
 }

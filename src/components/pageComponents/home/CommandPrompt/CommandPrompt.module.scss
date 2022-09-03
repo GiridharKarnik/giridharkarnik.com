@@ -1,5 +1,6 @@
 @import './styles/variables.module';
 @import './styles/mixins';
+@import './styles/mediaQueryMixins';
 
 .commandPromptContainer {
   height: 80px;
@@ -10,8 +11,15 @@
   margin-top: 30px;
   position: relative;
   padding: 10px 20px;
-
   @include flexCentered;
+
+  @include for-phone-only {
+    height: 40px;
+  }
+
+  @include for-tablet-portrait-up {
+    height: 60px
+  }
 
   .commandPromptInput {
     border: none;
@@ -19,8 +27,17 @@
     height: 100%;
     margin-left: 8px;
     flex: 1;
-    font-size: 22px;
+    font-size: 2vw;
     font-family: 'Source Code Pro', monospace;
+
+    @include for-phone-only {
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    @include for-tablet-landscape-up {
+      font-size: 20px;
+    }
 
     ::placeholder {
       color: $primary-placeholder-text-color-dark-background;

@@ -1,5 +1,6 @@
 @import './styles/mixins';
-@import './styles/variables.module.scss';
+@import './styles/variables.module';
+@import './styles/mediaQueryMixins';
 
 .container {
   width: 100vw;
@@ -20,19 +21,27 @@
     margin: 0 auto;
 
     .welcomeMessage {
-      font-size: 20px;
+      font-size: 3vw;
       color: $primary-text-color-dark-background;
       margin: 0;
       padding: 20px 0;
       font-family: 'Merriweather', serif;
+
+      @include for-tablet-portrait-up {
+        font-size: 20px;
+      }
     }
 
     .titleText {
-      font-size: 90px;
+      font-size: 10vw;
       color: $primary-text-color-dark-background;
       margin: 0;
       padding: 0;
       font-family: 'Merriweather Sans', sans-serif;
+
+      @include for-tablet-landscape-up {
+        font-size: 90px;
+      }
     }
   }
 }
