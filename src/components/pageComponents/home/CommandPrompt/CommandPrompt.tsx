@@ -21,7 +21,7 @@ export const CommandPrompt: React.FC<CommandPromptProps> = ({ onCommandEnter }) 
   const [command, setCommand] = React.useState<string>();
   const [commandTypedOut, setCommandTypedOut] = React.useState<string>();
 
-  const [userEnteredCommand, setUserEnteredCommand] = React.useState<string>();
+  const [userEnteredCommand, setUserEnteredCommand] = React.useState<string>('');
 
   const arrowHeight: string = width > 900 ? '16px' : width > 599 ? '12px' : '10px';
 
