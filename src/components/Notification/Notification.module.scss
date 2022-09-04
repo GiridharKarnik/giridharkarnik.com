@@ -1,0 +1,27 @@
+@import './styles/variables.module';
+@import './styles/mixins';
+@import './styles/mediaQueryMixins';
+
+.notificationContainer {
+  position: fixed;
+  bottom: -30px;
+  right: 30px;
+  @include flexCentered;
+  background-color: $primary-color-dark-error-accent-1;
+  box-shadow: $common-box-shadow;
+  border-radius: 10px;
+  padding: 12px;
+
+  transition: bottom 0.3s ease-in-out;
+}
+
+.notificationText {
+  font-size: 14px;
+  color: $primary-text-color-dark-background;
+  font-family: 'Merriweather Sans', sans-serif;
+  margin: 0 0 0 10px;
+
+  @include for-phone-only {
+    font-size: 12px;
+  }
+}

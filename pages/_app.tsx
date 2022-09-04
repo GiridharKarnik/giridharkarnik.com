@@ -2,6 +2,8 @@ import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { NotificationContextProvider } from '@src/context';
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
@@ -15,7 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="Giridhar Karnik, Full stack developer" />
         <meta name="author" content="Giridhar Karnik" />
       </Head>
-      <Component {...pageProps} />
+
+      <NotificationContextProvider>
+        <Component {...pageProps} />
+      </NotificationContextProvider>
     </div>
   );
 }

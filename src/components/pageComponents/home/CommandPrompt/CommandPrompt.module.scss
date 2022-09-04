@@ -5,7 +5,7 @@
 .commandPromptContainer {
   height: 80px;
   border-radius: 10px;
-  box-shadow: 5px 5px 15px -5px #000000;
+  box-shadow: $common-box-shadow;
   background-color: $primary-color-dark-accent-1;
   width: 100%;
   cursor: text;

@@ -1,5 +1,6 @@
-import React, { createContext, Dispatch, useContext, useReducer } from 'react';
+import React, { createContext, Dispatch, useContext, useEffect, useReducer } from 'react';
 import { NotificationType } from '../../types';
+import { Notification } from '@src/components';
 
 export interface NotificationState {
   message: string;
@@ -30,7 +31,7 @@ export type ToastContextActions = ShowNotification | HideNotification;
 
 export const defaultNotificationState: NotificationState = {
   message: '',
-  type: NotificationType.info,
+  type: NotificationType.error,
   showNotification: false,
 };
 
@@ -64,9 +65,29 @@ export const NotificationContextProvider: React.FC<{
   externalToastState?: NotificationState;
   children?: React.ReactNode;
 }> = ({ children, externalToastState }) => {
-  const reducerContext = useReducer(notificationReducer, Object.assign(defaultNotificationState, externalToastState));
+  const [state, dispatch] = useReducer(
+    notificationReducer,
+    Object.assign(defaultNotificationState, externalToastState)
+  );
 
-  return <NotificationContext.Provider value={reducerContext}>{children}</NotificationContext.Provider>;
+  useEffect(() => {
+    if (state.showNotification) {
+      setTimeout(() => {
+        dispatch({
+          type: NotificationActionTypes.HideNotification,
+        });
+      }, 3500);
+    }
+  }, [state.showNotification]);
+
+  return (
+    <NotificationContext.Provider value={[state, dispatch]}>
+      <div id="notification_context_parent">{children}</div>
+
+      <Notification {...state} />
+    </NotificationContext.Provider>
+  );
 };
 
-export const useToastState = (): [NotificationState, Dispatch<ToastContextActions>] => useContext(NotificationContext);
+export const useNotification = (): [NotificationState, Dispatch<ToastContextActions>] =>
+  useContext(NotificationContext);
