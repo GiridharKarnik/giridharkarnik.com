@@ -31,10 +31,12 @@
     font-size: 2.4vw;
     font-family: 'Source Code Pro', monospace;
     outline: none;
+    padding-bottom: 4px;
 
     @include for-phone-only {
       font-size: 12px;
       margin-left: 4px;
+      padding-bottom: 2px;
     }
 
     @include for-tablet-landscape-up {
