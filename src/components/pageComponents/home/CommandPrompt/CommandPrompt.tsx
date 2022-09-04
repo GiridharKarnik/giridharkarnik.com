@@ -64,6 +64,13 @@ export const CommandPrompt: React.FC<CommandPromptProps> = ({ onCommandEnter }) 
     setUserEnteredCommand(event.target.value);
   };
 
+  const onEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && userEnteredCommand && userEnteredCommand?.trim() !== '') {
+      onCommandEnter(userEnteredCommand);
+      setUserEnteredCommand('');
+    }
+  };
+
   return (
     <div className={styles.commandPromptContainer}>
       <ArrowIcon size={arrowHeight} color={variables.primaryTextColorDarkBackground} />
@@ -72,12 +79,9 @@ export const CommandPrompt: React.FC<CommandPromptProps> = ({ onCommandEnter }) 
         onClick={clearCommand}
         className={styles.commandPromptInput}
         placeholder={commandTypedOut !== undefined ? commandTypedOut : 'type a command and press ⏎'}
+        value={userEnteredCommand}
         onChange={onChange}
-        onKeyPress={event => {
-          if (event.key === 'Enter' && userEnteredCommand && userEnteredCommand?.trim() !== '') {
-            onCommandEnter(userEnteredCommand);
-          }
-        }}
+        onKeyDown={onEnter}
       />
     </div>
   );
