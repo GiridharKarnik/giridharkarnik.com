@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useIsomorphicLayoutEffect } from '@hooks/useIsomorphicLayoutEffect';
+import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 
 export function useWindowSize() {
   const [size, setSize] = useState([0, 0]);

@@ -2,8 +2,10 @@
 $primary-color-dark: #110F1B;
 $primary-color-dark-accent-1: #1E1D2A;
 $primary-icon-color-dark: #FB8B24;
+$primary-icon-color-dark-background: #E6E6E6;
 $primary-text-color-dark-background: #E6E6E6;
 $primary-placeholder-text-color-dark-background: #898989;
+$primary-color-dark-error-accent-1: #862A24;
 
 // device sizes
 $phone: 599px;
@@ -12,11 +14,15 @@ $tablet-landscape: 900px;
 $desktop: 1200px;
 $big-desktop: 1800px;
 
+//box shadow
+$common-box-shadow: 5px 5px 15px -5px #000000;
+
 :export {
     primaryColor: $primary-color-dark;
-    primaryIconColorDark: $primary-icon-color-dark;
     primaryTextColorDarkBackground: $primary-text-color-dark-background;
     primaryPlaceHolderTextColorDarkBackground: $primary-placeholder-text-color-dark-background;
+    primaryIconColorDark: $primary-icon-color-dark;
+    primaryIconColorDarkBackground: $primary-icon-color-dark-background;
 
     //device sizes
     phone: $phone;

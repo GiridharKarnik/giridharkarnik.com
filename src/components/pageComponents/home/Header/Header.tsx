@@ -4,7 +4,7 @@ import { GithubIcon, LinkedinIcon } from '@components/common/icons';
 import variables from '@styles/variables.module.scss';
 
 import styles from './Header.module.scss';
-import { useWindowSize } from '@hooks/useWindowSize';
+import { useWindowSize } from '@src/hooks/useWindowSize';
 
 export const Header: React.FC = () => {
   const [width] = useWindowSize();

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './CommandPrompt.module.scss';
 import { ArrowIcon } from '@components/common/icons';
 import variables from '@styles/variables.module.scss';
-import { useWindowSize } from '@hooks/index';
+import { useWindowSize } from '@src/hooks';
 
 const commands: Array<string> = [
   'compare json',
@@ -12,11 +12,16 @@ const commands: Array<string> = [
   'launch missiles',
 ];
 
-export const CommandPrompt: React.FC = () => {
+interface CommandPromptProps {
+  onCommandEnter: (command: string) => void;
+}
+
+export const CommandPrompt: React.FC<CommandPromptProps> = ({ onCommandEnter }) => {
   const [width] = useWindowSize();
   const [command, setCommand] = React.useState<string>();
-
   const [commandTypedOut, setCommandTypedOut] = React.useState<string>();
+
+  const [userEnteredCommand, setUserEnteredCommand] = React.useState<string>();
 
   const arrowHeight: string = width > 900 ? '16px' : width > 599 ? '12px' : '10px';
 
@@ -55,6 +60,17 @@ export const CommandPrompt: React.FC = () => {
     setCommandTypedOut('');
   };
 
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEnteredCommand(event.target.value);
+  };
+
+  const onEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && userEnteredCommand && userEnteredCommand?.trim() !== '') {
+      onCommandEnter(userEnteredCommand);
+      setUserEnteredCommand('');
+    }
+  };
+
   return (
     <div className={styles.commandPromptContainer}>
       <ArrowIcon size={arrowHeight} color={variables.primaryTextColorDarkBackground} />
@@ -63,6 +79,9 @@ export const CommandPrompt: React.FC = () => {
         onClick={clearCommand}
         className={styles.commandPromptInput}
         placeholder={commandTypedOut !== undefined ? commandTypedOut : 'type a command and press ⏎'}
+        value={userEnteredCommand}
+        onChange={onChange}
+        onKeyDown={onEnter}
       />
     </div>
   );

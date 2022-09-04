@@ -5,7 +5,7 @@
 .commandPromptContainer {
   height: 80px;
   border-radius: 10px;
-  box-shadow: 5px 5px 15px -5px #000000;
+  box-shadow: $common-box-shadow;
   background-color: $primary-color-dark-accent-1;
   width: 100%;
   cursor: text;
@@ -31,10 +31,12 @@
     font-size: 2.4vw;
     font-family: 'Source Code Pro', monospace;
     outline: none;
+    padding-bottom: 4px;
 
     @include for-phone-only {
       font-size: 12px;
       margin-left: 4px;
+      padding-bottom: 2px;
     }
 
     @include for-tablet-landscape-up {

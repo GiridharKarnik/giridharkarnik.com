@@ -1,0 +1,47 @@
+@import './styles/variables.module';
+@import './styles/mixins';
+@import './styles/mediaQueryMixins';
+
+.notificationParentWrapper {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  transition: bottom 0.3s ease-in-out;
+  padding: 10px 40px;
+
+  @include for-phone-only {
+    justify-content: center;
+  }
+
+  @include for-tablet-portrait-up {
+    align-items: flex-end;
+  }
+}
+
+.notificationContainer {
+  @include flexCentered;
+  background-color: $primary-color-dark-error-accent-1;
+  box-shadow: $common-box-shadow;
+  border-radius: 10px;
+  padding: 12px;
+  width: fit-content;
+
+  @include for-phone-only {
+    padding: 8px;
+  }
+}
+
+.notificationText {
+  font-size: 14px;
+  color: $primary-text-color-dark-background;
+  font-family: 'Merriweather Sans', sans-serif;
+  margin: 0 0 0 10px;
+
+  @include for-phone-only {
+    font-size: 12px;
+    margin: 0 0 0 8px;
+  }
+}
